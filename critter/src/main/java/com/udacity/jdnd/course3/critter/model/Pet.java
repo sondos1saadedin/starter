@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class Pet {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     private PetType type;
 
@@ -27,7 +27,7 @@ public class Pet {
     public Pet() {
     }
 
-    public Pet(long id, PetType type, String name, Customer customer, LocalDate birthDate, String notes) {
+    public Pet(Long id, PetType type, String name, Customer customer, LocalDate birthDate, String notes) {
         this.id = id;
         this.type = type;
         this.name = name;
@@ -36,7 +36,7 @@ public class Pet {
         this.notes = notes;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
