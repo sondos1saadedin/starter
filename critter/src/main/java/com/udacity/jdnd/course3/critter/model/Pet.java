@@ -19,7 +19,7 @@ public class Pet {
     private String name;
 
     @ManyToOne(targetEntity = Customer.class, optional = false)
-    private Customer owner;
+    private Customer customer;
 
     private LocalDate birthDate;
     private String notes;
@@ -27,11 +27,11 @@ public class Pet {
     public Pet() {
     }
 
-    public Pet(long id, PetType type, String name, Customer owner, LocalDate birthDate, String notes) {
+    public Pet(long id, PetType type, String name, Customer customer, LocalDate birthDate, String notes) {
         this.id = id;
         this.type = type;
         this.name = name;
-        this.owner = owner;
+        this.customer = customer;
         this.birthDate = birthDate;
         this.notes = notes;
     }
@@ -60,12 +60,12 @@ public class Pet {
         this.name = name;
     }
 
-    public Customer getOwner() {
-        return owner;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setOwner(Customer owner) {
-        this.owner = owner;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public LocalDate getBirthDate() {
