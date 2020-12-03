@@ -12,7 +12,7 @@ import java.util.Set;
 public class Schedule {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @ManyToMany(targetEntity = Employee.class)
     private List<Employee> employees;
@@ -36,11 +36,11 @@ public class Schedule {
         this.activities = activities;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

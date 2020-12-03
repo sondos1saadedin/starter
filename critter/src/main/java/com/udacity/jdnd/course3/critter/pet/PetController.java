@@ -25,12 +25,13 @@ public class PetController {
         return new PetDTO(pet.getId(), pet.getType(), pet.getName(), pet.getCustomer().getId(), pet.getBirthDate(), pet.getNotes());
     }
 
-    @PostMapping
+    @PostMapping("/{ownerId}")
     public PetDTO savePet(@RequestBody PetDTO petDTO) {
         Pet pet = new Pet(null, petDTO.getType(), petDTO.getName(),null,  petDTO.getBirthDate(), petDTO.getNotes());
         try {
             return convertPetToPetDTO(petService.savePet(pet, petDTO.getOwnerId()));
         } catch (Exception exception) {
+            exception.printStackTrace();
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pet could not be saved", exception);
         }
     }
