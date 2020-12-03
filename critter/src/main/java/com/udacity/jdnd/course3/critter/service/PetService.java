@@ -35,17 +35,14 @@ public class PetService {
     }
 
     public List<Pet> getPetsByCustomerId(long customerId) {
-        List<Pet> pets = petRepository.findPetByCustomerId(customerId);
-        return pets;
+        return petRepository.findPetByCustomerId(customerId);
     }
 
     public List<Pet> getAllPets() {
-        List<Pet> pets = petRepository.findAll();
-        return pets;
+        return petRepository.findAll();
     }
 
     public Pet getPetById(Long petId) {
-        Pet pet = petRepository.getOne(petId);
-        return pet;
+        return petRepository.getOne(petId);
     }
 }

@@ -22,13 +22,6 @@ public class ScheduleController {
     @Autowired
     ScheduleService scheduleService;
 
-    private ScheduleDTO convertScheduleToScheduleDTO(Schedule schedule) {
-        List<Long> employeeIds = schedule.getEmployees().stream().map(Employee::getId).collect(Collectors.toList());
-        List<Long> petIds = schedule.getPets().stream().map(Pet::getId).collect(Collectors.toList());
-
-        return new ScheduleDTO(schedule.getId(), employeeIds, petIds, schedule.getDate(), schedule.getActivities());
-    }
-
     @PostMapping
     public ScheduleDTO createSchedule(@RequestBody ScheduleDTO scheduleDTO) {
         Schedule schedule = new Schedule(null, null, null, scheduleDTO.getDate(), scheduleDTO.getActivities());;
@@ -52,7 +45,7 @@ public class ScheduleController {
         try {
             schedules = scheduleService.getPetSchedule(petId);
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pet schedule with id: " + petId + " not found", exception);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pet's schedule id: " + petId + " couldn't be found", exception);
         }
         return schedules.stream().map(this::convertScheduleToScheduleDTO).collect(Collectors.toList());
     }
@@ -63,7 +56,7 @@ public class ScheduleController {
         try {
             schedules = scheduleService.getEmployeeSchedule(employeeId);
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Employee schedule with employee id: " + employeeId + " not found", exception);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Employee schedule id: " + employeeId + " couldn't not found", exception);
         }
         return schedules.stream().map(this::convertScheduleToScheduleDTO).collect(Collectors.toList());
     }
@@ -74,8 +67,16 @@ public class ScheduleController {
         try {
             schedules = scheduleService.getCustomerSchedule(customerId);
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Schedule with owner id " + customerId + " not found", exception);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Schedule user id " + customerId + " couldn't not found", exception);
         }
         return schedules.stream().map(this::convertScheduleToScheduleDTO).collect(Collectors.toList());
     }
+
+    private ScheduleDTO convertScheduleToScheduleDTO(Schedule schedule) {
+        List<Long> employeeIds = schedule.getEmployees().stream().map(Employee::getId).collect(Collectors.toList());
+        List<Long> petIds = schedule.getPets().stream().map(Pet::getId).collect(Collectors.toList());
+
+        return new ScheduleDTO(schedule.getId(), employeeIds, petIds, schedule.getDate(), schedule.getActivities());
+    }
+
 }

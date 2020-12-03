@@ -21,21 +21,18 @@ public class EmployeeService {
     EmployeeRepository employeeRepository;
 
     public Employee saveEmployee(Employee employee) {
-        Employee newEmployee = employeeRepository.save(employee);
-        return newEmployee;
+        return employeeRepository.save(employee);
     }
 
     public List<Employee> getEmployeesByService(LocalDate date, Set<EmployeeSkill> skills){
-        List<Employee> employees = employeeRepository
+        return employeeRepository
                 .findByDaysAvailable(date.getDayOfWeek()).stream()
                 .filter(employee -> employee.getSkills().containsAll(skills))
                 .collect(Collectors.toList());
-        return employees;
     }
 
     public Employee getEmployeeById(Long employeeId) {
-        Employee employee = employeeRepository.getOne(employeeId);
-        return employee;
+        return employeeRepository.getOne(employeeId);
     }
 
     public void setEmployeeAvailability(Set<DayOfWeek> days, Long employeeId) {
