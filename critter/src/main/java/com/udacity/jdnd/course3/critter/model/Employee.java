@@ -20,7 +20,8 @@ public class Employee extends User {
     public Employee() {
     }
 
-    public Employee(Set<EmployeeSkill> skills, Set<DayOfWeek> daysAvailable) {
+    public Employee(Long id, String name, Set<EmployeeSkill> skills, Set<DayOfWeek> daysAvailable) {
+        super(id, name);
         this.skills = skills;
         this.daysAvailable = daysAvailable;
     }
