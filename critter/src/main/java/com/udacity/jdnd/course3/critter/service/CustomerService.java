@@ -32,8 +32,7 @@ public class CustomerService {
     }
 
     public Customer getCustomerByPetId(Long petId) {
-//        Customer customer = petRepository.getOne(petId).getCustomer();
-        return customerRepository.findCustomerByPetId(petId);
+        return petRepository.getOne(petId).getCustomer();
     }
 
     public List<Customer> getAllCustomers() {
